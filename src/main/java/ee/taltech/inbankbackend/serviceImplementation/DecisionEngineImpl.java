@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DecisionEngineImpl implements DecisionEngine {
+    private final AgeValidationServiceImpl ageValidationService = new AgeValidationServiceImpl();
     private final InputValidationService inputValidationService = new InputInputValidationServiceImpl();
     private final CreditModifierCalculator creditModifierCalculator = new CreditModifierCalculatorImpl();
 
@@ -41,6 +42,15 @@ public class DecisionEngineImpl implements DecisionEngine {
             NoValidLoanException {
         try {
             inputValidationService.verifyInputs(personalCode, loanAmount, loanPeriod);
+        } catch (Exception e) {
+            return new Decision(null, null, e.getMessage());
+        }
+
+        try {
+            if (!ageValidationService.validationPassed(personalCode)) {
+                System.out.println(!ageValidationService.validationPassed(personalCode));
+                return new Decision(null, null, "Loan cannot be given due to the age restriction!");
+            }
         } catch (Exception e) {
             return new Decision(null, null, e.getMessage());
         }

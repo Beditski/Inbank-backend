@@ -1,6 +1,8 @@
 package ee.taltech.inbankbackend.serviceImplementation;
 
+import com.github.vladislavgoltjajev.personalcode.exception.PersonalCodeException;
 import com.github.vladislavgoltjajev.personalcode.locale.estonia.EstonianPersonalCodeValidator;
+import com.github.vladislavgoltjajev.personalcode.locale.estonia.EstonianPersonalCodeParser;
 import ee.taltech.inbankbackend.config.DecisionEngineConstants;
 import ee.taltech.inbankbackend.exceptions.InvalidLoanAmountException;
 import ee.taltech.inbankbackend.exceptions.InvalidLoanPeriodException;
@@ -22,7 +24,7 @@ public class InputInputValidationServiceImpl implements InputValidationService {
      * @throws InvalidLoanPeriodException If the requested loan period is invalid
      */
     public void verifyInputs(String personalCode, Long loanAmount, int loanPeriod)
-            throws InvalidPersonalCodeException, InvalidLoanAmountException, InvalidLoanPeriodException {
+            throws InvalidPersonalCodeException, InvalidLoanAmountException, InvalidLoanPeriodException, PersonalCodeException {
 
         if (!validator.isValid(personalCode)) {
             throw new InvalidPersonalCodeException("Invalid personal ID code!");

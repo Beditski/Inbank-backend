@@ -88,8 +88,3 @@ ee.taltech.inbankbackend/
 │
 └── InbankBackendApplication.java       # Main class
 ```
-
-# TICKET-102 implementation
-
-
-

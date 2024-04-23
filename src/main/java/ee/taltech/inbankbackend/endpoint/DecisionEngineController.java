@@ -8,7 +8,6 @@ import ee.taltech.inbankbackend.model.Decision;
 import ee.taltech.inbankbackend.model.DecisionRequest;
 import ee.taltech.inbankbackend.model.DecisionResponse;
 import ee.taltech.inbankbackend.service.DecisionEngine;
-import ee.taltech.inbankbackend.serviceImplementation.DecisionEngineImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
