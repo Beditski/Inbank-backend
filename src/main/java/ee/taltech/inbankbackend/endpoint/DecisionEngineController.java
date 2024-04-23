@@ -4,8 +4,10 @@ import ee.taltech.inbankbackend.exceptions.InvalidLoanAmountException;
 import ee.taltech.inbankbackend.exceptions.InvalidLoanPeriodException;
 import ee.taltech.inbankbackend.exceptions.InvalidPersonalCodeException;
 import ee.taltech.inbankbackend.exceptions.NoValidLoanException;
-import ee.taltech.inbankbackend.service.Decision;
-import ee.taltech.inbankbackend.service.DecisionEngine;
+import ee.taltech.inbankbackend.model.Decision;
+import ee.taltech.inbankbackend.model.DecisionRequest;
+import ee.taltech.inbankbackend.model.DecisionResponse;
+import ee.taltech.inbankbackend.serviceImplementation.DecisionEngineImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 public class DecisionEngineController {
 
-    private final DecisionEngine decisionEngine;
+    private final DecisionEngineImpl decisionEngine;
     private final DecisionResponse response;
 
     @Autowired
-    DecisionEngineController(DecisionEngine decisionEngine, DecisionResponse response) {
-        this.decisionEngine = decisionEngine;
+    DecisionEngineController(DecisionEngineImpl decisionEngineImpl, DecisionResponse response) {
+        this.decisionEngine = decisionEngineImpl;
         this.response = response;
     }
 
