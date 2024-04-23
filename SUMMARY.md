@@ -77,14 +77,14 @@ ee.taltech.inbankbackend/
 │   └──
 │
 ├── service/
-│   ├── CreditModifierCalculator.java        # Interface forcalculating credit doifier
+│   ├── CreditModifierCalculator.java        # Interface for calculating credit doifier
 │   ├── DecisionEngine.java                  # Interface for decision-making logic
 │   └── InputValidationService.java          # Interface for input validation logic
 │
 ├── serviceImplementation
-│   ├── CreditModifierCalculatorImpl.java    # Implements DecisionEngine
-│   ├── DecisionEngine.java                  # Implements ValidationService, handles all validation tasks
-│   └── InputValidationServiceImpl.java      # Service for calculating credit-related metrics
+│   ├── CreditModifierCalculatorImpl.java    # Implements CreditModifierCalculator.java
+│   ├── DecisionEngine.java                  # Implements DecisionEngine.java
+│   └── InputValidationServiceImpl.java      # Implements InputValidationService, handles all validation tasks 
 │
-└── InbankBackendApplication.java       # Main class
+└── InbankBackendApplication.java            # Main class
 ```
