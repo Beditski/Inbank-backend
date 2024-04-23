@@ -55,8 +55,8 @@ public class DecisionEngineImpl implements DecisionEngine {
 
         int highestValidLoanAmount = creditModifier * loanPeriod;
 
-        while (highestValidLoanAmount < DecisionEngineConstants.MINIMUM_LOAN_AMOUNT) {
-            loanPeriod++;
+        if (highestValidLoanAmount < DecisionEngineConstants.MINIMUM_LOAN_AMOUNT) {
+            loanPeriod = DecisionEngineConstants.MINIMUM_LOAN_AMOUNT / creditModifier;
             highestValidLoanAmount = creditModifier * loanPeriod;
         }
 

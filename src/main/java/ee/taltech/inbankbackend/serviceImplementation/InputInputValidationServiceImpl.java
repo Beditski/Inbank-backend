@@ -31,7 +31,7 @@ public class InputInputValidationServiceImpl implements InputValidationService {
                 || (loanAmount > DecisionEngineConstants.MAXIMUM_LOAN_AMOUNT)) {
             throw new InvalidLoanAmountException("Invalid loan amount!");
         }
-        if (!(DecisionEngineConstants.MINIMUM_LOAN_PERIOD <= loanPeriod)
+        if ((DecisionEngineConstants.MINIMUM_LOAN_PERIOD > loanPeriod)
                 || (loanPeriod > DecisionEngineConstants.MAXIMUM_LOAN_PERIOD)) {
             throw new InvalidLoanPeriodException("Invalid loan period!");
         }

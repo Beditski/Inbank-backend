@@ -1,5 +1,6 @@
-## What intern did well:
+# TICKET-101 validation
 
+## What intern did well:
 
 - **Project and code structure** - the project structure is organized into different modules, which
 makes it easier to maintain and scale the existing code base. Written classes and methods are in general well-defined,
@@ -37,16 +38,21 @@ calculating the credit modifier based on the personal code, and determining the 
 - **Consequence** - modifying the loan rules or adding new types of validations would require changes to the existing code base, potentially introducing bugs in previously tested code.
 - **Solution** - create an interfaces that allows for extending and modifying functionality (like different types of validators or decision strategies) without modifying the existing code.
 
-### 3. (LSP), 4. (ISP), 5. (DIP)
+### 3. (LSP), 4. (ISP), 
 - Not applicable at the given stage of project development.
-  
+
+### 5. Dependency Injection Principle (DIP)
+- **Violation** -  hard dependency on `DecisionEngine` class in the `DecisionEngineController`.
+- **Consequence** - hard dependency may complicate development process in the future
+- **Solution** - change `DecisionEngine` to interface and create an implementation to `DecisionEngineImpl` class. Access `DecisionEngineImpl` via `DecisionEngine` interface.
+
 
 ## Summary
 - Fixed minor issues related to the code logic.
-- Refactoring with the folowing project structure:
+- Refactoring with the following project structure:
 
 ``` 
-java/
+ee.taltech.inbankbackend/
 ├── config/
 │   └── DecisionEngineConstants.java        
 │
@@ -54,29 +60,36 @@ java/
 │   └──
 │
 ├── endpoint/
-│   └── DecisionEngineController.java # REST controller to handle decision-related incoming request
+│   └── DecisionEngineController.java        # REST controller to handle decision-related incoming request
 │
 ├── exception/
 │   ├── InvalidLoanAmountException.java
 │   ├── InvalidLoanPeriodException.java
-│   └── InvalidPersonalCodeException.java
+│   ├── InvalidPersonalCodeException.java
+│   └── NoValidLoanException
 │
 ├── model/
-│   ├── DecisionRequest.java          # Model for incoming decision request data
-│   ├── DecisionResponse.java         # Model for outgoing decision response data
-│   └── Customer.java                 # Model representing a customer or borrower
-│
-├── service/
-│   ├── DecisionEngine.java           # Interface for decision-making logic
-│   └── ValidationService.java        # Interface for validation logic
+│   ├── Decision.java                        # Model for transferimng decision data
+│   ├── DecisionRequest.java                 # Model for incoming decision request data
+│   └── DecisionResponse.java                # Model for outgoing decision response data
 │
 ├── repository/
 │   └──
 │
-├── serviceImplementation
-│   ├── DecisionEngineImpl.java       # Implements DecisionEngine
-│   ├── LoanValidationService.java    # Implements ValidationService, handles all validation tasks
-│   └── CreditCalculationService.java # Service for calculating credit-related metrics
+├── service/
+│   ├── CreditModifierCalculator.java        # Interface forcalculating credit doifier
+│   ├── DecisionEngine.java                  # Interface for decision-making logic
+│   └── InputValidationService.java          # Interface for input validation logic
 │
-└── InbankBackendApplication.java     # Main class
+├── serviceImplementation
+│   ├── CreditModifierCalculatorImpl.java    # Implements DecisionEngine
+│   ├── DecisionEngine.java                  # Implements ValidationService, handles all validation tasks
+│   └── InputValidationServiceImpl.java      # Service for calculating credit-related metrics
+│
+└── InbankBackendApplication.java       # Main class
 ```
+
+# TICKET-102 implementation
+
+
+
